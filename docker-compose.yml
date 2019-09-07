@@ -1,0 +1,12 @@
+version: "3.4"
+services:
+    db:
+        image: postgres
+        container_name: home-t-database
+        environment:
+            POSTGRES_PASSWORD: root
+        ports:
+            - 5432:5432
+        restart: on-failure
+        volumes:
+            - ./.dbcache/postgres:/var/lib/postgresql
