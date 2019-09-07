@@ -6,7 +6,8 @@
     "author": "Juan Carlos <juanksoliveira@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "dev": "nodemon src/server.js"
+        "dev": "nodemon src/server.js",
+        "db:migrate": "sequelize db:migrate"
     },
     "devDependencies": {
         "eslint": "^6.3.0",
