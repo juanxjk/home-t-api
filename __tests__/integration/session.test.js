@@ -1,6 +1,10 @@
 const { User } = require("../../src/models");
+const truncate = require("../utils/truncate");
 
 describe("Database", () => {
+    beforeEach(async () => {
+        await truncate();
+    });
     it("should create a new user", async () => {
         const userExample = {
             name: "Foo Bar",
