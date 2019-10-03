@@ -1,5 +1,10 @@
 const { User } = require("../../src/models");
 const truncate = require("../utils/truncate");
+describe("Authentication", () => {
+    beforeEach(async () => {
+        await truncate();
+    });
+});
 
 describe("Database", () => {
     beforeEach(async () => {
