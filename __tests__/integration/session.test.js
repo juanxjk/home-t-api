@@ -22,6 +22,22 @@ describe("Authentication", () => {
 
         expect(response.status).toBe(200);
     });
+
+    it("should not authenticate with invalid credentials", async () => {
+        const userExample = {
+            name: "Foo Bar",
+            email: "foo@bar.com",
+            password: "123123"
+        };
+
+        const user = await User.create(userExample);
+
+        const response = await request(app)
+            .post("/sessions")
+            .send({ email: user.email, password: "123456" });
+
+        expect(response.status).toBe(401);
+    });
 });
 
 describe("Database", () => {
