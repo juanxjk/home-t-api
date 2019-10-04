@@ -1,4 +1,5 @@
 const routes = require("express").Router();
+const authMiddleware = require("./middlewares/auth");
 const SessionController = require("./controllers/SessionController");
 
 routes.get("/", (req, res) => {
@@ -6,4 +7,6 @@ routes.get("/", (req, res) => {
 });
 
 routes.post("/sessions", SessionController.store);
+
+routes.use(authMiddleware);
 module.exports = routes;
