@@ -1,8 +1,8 @@
 const request = require("supertest");
 
 const app = require("../../src/app");
-const { User } = require("../../src/models");
 const truncate = require("../utils/truncate");
+const factory = require("../factories.js");
 
 describe("Authentication", () => {
     beforeEach(async () => {
@@ -10,13 +10,7 @@ describe("Authentication", () => {
     });
 
     it("should receive JWT Token when authenticated with valid credentials", async () => {
-        const userExample = {
-            name: "Foo Bar",
-            email: "foo@bar.com",
-            password: "123456"
-        };
-
-        const user = await User.create(userExample);
+        const user = await factory.create("User", { password: "123456" });
 
         const response = await request(app)
             .post("/sessions")
@@ -26,13 +20,7 @@ describe("Authentication", () => {
     });
 
     it("should authenticate with valid credentials", async () => {
-        const userExample = {
-            name: "Foo Bar",
-            email: "foo@bar.com",
-            password: "123456"
-        };
-
-        const user = await User.create(userExample);
+        const user = await factory.create("User", { password: "123456" });
 
         const response = await request(app)
             .post("/sessions")
@@ -42,13 +30,7 @@ describe("Authentication", () => {
     });
 
     it("should not authenticate with invalid credentials", async () => {
-        const userExample = {
-            name: "Foo Bar",
-            email: "foo@bar.com",
-            password: "123123"
-        };
-
-        const user = await User.create(userExample);
+        const user = await factory.create("User", { password: "12346546" });
 
         const response = await request(app)
             .post("/sessions")
